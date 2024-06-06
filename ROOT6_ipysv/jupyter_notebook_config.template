@@ -1,0 +1,13 @@
+import os
+rootbin = '/opt/root/bin'
+rootlib = '/opt/root/lib'
+os.environ['PYTHONPATH']      = '%s' % rootlib + ':' + os.getenv('PYTHONPATH', '')
+os.environ['PATH']            = '%s:%s/bin' % (rootbin,rootbin) + ':' + os.getenv('PATH', '')
+os.environ['LD_LIBRARY_PATH'] = '%s' % rootlib + ':' + os.getenv('LD_LIBRARY_PATH', '')
+c.NotebookApp.extra_static_paths = ['/root/jsroot/jsroot-7.2.0/']
+
+c.NotebookApp.ip = '%%SV_IP%%'
+c.NotebookApp.port = 52190
+c.NotebookApp.open_browser = False
+# for constant pw from python -c "from notebook.auth import passwd; print(passwd('na0w9K', algorithm='sha256'))"
+# c.NotebookApp.password = 'sha256:a786984b46b0:cf978a306b53bd93753bb82362c7d07e476c614b35657ba8998cc6b6aad12682'
