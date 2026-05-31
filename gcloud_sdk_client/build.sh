@@ -5,6 +5,9 @@ USER_GROUP=$(id -g -n)
 GID=$(id -g)
 IMAGE_NAME="gcloud_sdk_client"
 
+USERNAME=$([ "$UID" -eq 1000 ] && echo "ubuntu" || echo "$USERNAME")
+echo USERNAME as ${USERNAME}
+
 docker build \
   --build-arg USERNAME=$USERNAME \
   --build-arg USER_GROUP=$USER_GROUP \
