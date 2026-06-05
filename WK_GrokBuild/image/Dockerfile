@@ -3,11 +3,21 @@ FROM ubuntu:26.04
 MAINTAINER kaiyi
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Taipei
-RUN apt update -y && apt install -y vim g++ git curl ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        sudo \
+        vim \
+        g++ git \
+        curl ca-certificates \
+        python3 python-is-python3 pip \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /app/grok_build
-ENV GROK_BIN_DIR=/app/grok_build
-ENV PATH="/app/grok_build:${PATH}"
+ENV GROK_BIN_DIR=/app/grok_build \
+    PATH="/app/grok_build:${PATH}" \
+    TERM=xterm-256color \
+    COLORTERM=truecolor \
+    LANG=en_US.UTF-8
 COPY install-grok.sh /app/grok_build/
 
 WORKDIR /app/grok_build
@@ -24,4 +34,5 @@ RUN /app/grok_build/install-grok.sh && \
     echo "✅ Grok CLI 已成功安裝到 /app/grok_build"
 
 RUN mkdir /work-dir
-
+RUN usermod -aG sudo ubuntu
+RUN bash -c 'echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && chmod 0440 /etc/sudoers.d/ubuntu'
