@@ -1,0 +1,30 @@
+Create a reusable Skill named "add-cute-black-cat".
+
+Description:
+Simple one-command tool that takes one image path and uses Grok Imagine to add a cute anime-style black cat into the photo.
+
+Usage (exactly as user wants):
+/add-cute-black-cat <image_path>
+
+Example:
+/add-cute-black-cat photo.jpg
+/add-cute-black-cat pic/my_dog.jpg
+
+Automatic workflow:
+1. Load the input image (first and only argument)
+2. Use Grok Imagine's built-in image editing capability to add ONE cute anime black cat
+3. Cat style: chibi / kawaii anime style, big sparkling eyes, small body, playful pose, glossy black fur with white accents
+4. Cat placement: naturally integrated (on lap, on shoulder, sitting on table, peeking from corner, etc.) — make it look like it belongs in the scene
+5. Preserve original photo lighting, style and quality as much as possible
+6. Save output as "<original_filename>_with_cat.jpg" in the current folder
+7. Print short log (including where the cat was placed)
+
+Requirements:
+- Store everything in .grok/skills/add-cute-black-cat/
+- Include clear SKILL.md with usage examples
+- Prefer using Grok Build's built-in Imagine / image-edit tool (do NOT write heavy Python code if possible)
+- If a small Python wrapper is needed, keep it minimal and only for file handling
+- Support any image format (jpg, png, etc.)
+- Container-aware (Podman ubuntu) with --break-system-packages if needed
+
+Generate the complete skill now.
